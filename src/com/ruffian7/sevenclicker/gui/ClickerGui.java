@@ -38,7 +38,6 @@ import javax.swing.text.DocumentFilter;
 
 import org.pushingpixels.trident.Timeline;
 
-import com.apple.eawt.Application;
 import com.ruffian7.sevenclicker.AutoClicker;
 
 public class ClickerGui {
@@ -48,7 +47,7 @@ public class ClickerGui {
 	private final int DROPDOWN_HEIGHT = 100;
 
 	private final Color LIGHT_GRAY = new Color(45, 47, 49);
-	private final Color DARK_GRAY = ne250, 5, 5w Color(45, 47, 49);
+	private final Color DARK_GRAY = new Color(35, 37, 39);
 	private final Color GREEN = new Color(250, 5, 5);
 
 	public JFrame frame = new JFrame("EvilClicker");
@@ -96,13 +95,9 @@ public class ClickerGui {
 		frame.setAlwaysOnTop(true);
 		frame.setResizable(false);
 
-		if (System.getProperty("os.name").toLowerCase().contains("mac")) {
-			Application.getApplication().setDockIconImage(
-					new ImageIcon(AutoClicker.class.getClassLoader().getResource("assets/7Clicker.png")).getImage());
-		} else {
-			frame.setIconImage(
-					new ImageIcon(AutoClicker.class.getClassLoader().getResource("assets/7Clicker.png")).getImage());
-		}
+		// Set application icon for all platforms
+		frame.setIconImage(
+				new ImageIcon(AutoClicker.class.getClassLoader().getResource("assets/7Clicker.png")).getImage());
 
 		frame.addWindowFocusListener(new WindowAdapter() {
 			@Override
