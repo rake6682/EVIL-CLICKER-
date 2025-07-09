@@ -1,5 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: com.ruffian7.sevenclicker.AutoClicker
-Class-Path: jnativehook-2.0.3.jar trident.jar
-Created-By: 22.0.1 (Oracle Corporation)
-
