@@ -18,12 +18,13 @@ public class RangeSlider extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public int sliderVal1 = 7;
 	public int sliderVal2 = 11;
+	private static final int MAX_CPS_SLIDER = 1000; // Support up to 200 CPS
 
 	Rectangle2D.Double sliderBody = new Rectangle2D.Double(0, 2.5, 130, 5);
-	Ellipse2D.Double sliderThumb1 = new Ellipse2D.Double((sliderVal1 / 20.0f) * 130, 0, 10, 10);
-	Ellipse2D.Double sliderThumb2 = new Ellipse2D.Double((sliderVal2 / 20.0f) * 130, 0, 10, 10);
-	Rectangle2D.Double sliderRange = new Rectangle2D.Double((sliderVal1 / 20.0f) * 130 + 5, 3,
-			((sliderVal2 - sliderVal1) / 20.0f) * 130, 4);
+	Ellipse2D.Double sliderThumb1 = new Ellipse2D.Double((sliderVal1 / (double)MAX_CPS_SLIDER) * 130, 0, 10, 10);
+	Ellipse2D.Double sliderThumb2 = new Ellipse2D.Double((sliderVal2 / (double)MAX_CPS_SLIDER) * 130, 0, 10, 10);
+	Rectangle2D.Double sliderRange = new Rectangle2D.Double((sliderVal1 / (double)MAX_CPS_SLIDER) * 130 + 5, 3,
+			((sliderVal2 - sliderVal1) / (double)MAX_CPS_SLIDER) * 130, 4);
 
 	public RangeSlider(JPanel panel, int x, int y) {
 		setLayout(null);
@@ -56,7 +57,7 @@ public class RangeSlider extends JPanel {
 					sliderRange.x = Math.min(sliderThumb1.x, sliderThumb2.x) + 5;
 					sliderRange.width = Math.max(sliderThumb1.x, sliderThumb2.x)
 							- Math.min(sliderThumb1.x, sliderThumb2.x);
-					sliderVal1 = (int) Math.round(((sliderThumb1.x + 2) / 130) * 20);
+					sliderVal1 = (int) Math.round(((sliderThumb1.x + 2) / 130.0) * MAX_CPS_SLIDER);
 					AutoClicker.minCPS = Math.min(sliderVal1, sliderVal2) + 1;
 					AutoClicker.maxCPS = Math.max(sliderVal1, sliderVal2) + 1;
 					AutoClicker.gui.minCPSField.setText(String.valueOf(AutoClicker.minCPS));
@@ -67,7 +68,7 @@ public class RangeSlider extends JPanel {
 					sliderRange.x = Math.min(sliderThumb1.x, sliderThumb2.x) + 5;
 					sliderRange.width = Math.max(sliderThumb1.x, sliderThumb2.x)
 							- Math.min(sliderThumb1.x, sliderThumb2.x);
-					sliderVal2 = (int) Math.round(((sliderThumb2.x + 2) / 130) * 20);
+					sliderVal2 = (int) Math.round(((sliderThumb2.x + 2) / 130.0) * MAX_CPS_SLIDER);
 					AutoClicker.minCPS = Math.min(sliderVal1, sliderVal2) + 1;
 					AutoClicker.maxCPS = Math.max(sliderVal1, sliderVal2) + 1;
 					AutoClicker.gui.minCPSField.setText(String.valueOf(AutoClicker.minCPS));
