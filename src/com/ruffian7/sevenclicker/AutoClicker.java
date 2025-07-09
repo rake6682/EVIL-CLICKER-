@@ -78,7 +78,7 @@ public class AutoClicker {
 				// Use much smaller sleep for high CPS
 				if (maxCPS > 50) {
 					// For high CPS, use busy waiting with minimal sleep
-					Thread.sleep(0, 100000); // 0.1 milliseconds
+					Thread.sleep(0, 100); // 100 nanoseconds to see what happens
 				} else {
 					Thread.sleep(1);
 				}

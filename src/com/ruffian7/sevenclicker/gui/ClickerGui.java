@@ -403,6 +403,7 @@ public class ClickerGui {
 	private void textFieldSetCPS(boolean isMin) {
 		JTextField textField = isMin ? minCPSField : maxCPSField;
 		final int MAX_CPS = 1000; // Support up to 1000 CPS
+		final int MAX_CPS_SLIDER = 1000; // Must match RangeSlider.MAX_CPS_SLIDER
 
 		if (textField.getText().matches("^\\d+$")
 				&& (isMin && Integer.parseInt(textField.getText()) >= 1
@@ -413,11 +414,11 @@ public class ClickerGui {
 
 			if ((isMin && slider.sliderVal1 <= slider.sliderVal2)
 					|| (!isMin && slider.sliderVal1 > slider.sliderVal2)) {
-				slider.sliderVal1 = (cpsFieldVal > 200) ? 199 : cpsFieldVal - 1;
-				slider.sliderThumb1.x = (slider.sliderVal1 / 200.0) * 130;
+				slider.sliderVal1 = (cpsFieldVal > MAX_CPS_SLIDER) ? MAX_CPS_SLIDER - 1 : cpsFieldVal - 1;
+				slider.sliderThumb1.x = (slider.sliderVal1 / (double)MAX_CPS_SLIDER) * 130;
 			} else {
-				slider.sliderVal2 = (cpsFieldVal > 200) ? 199 : cpsFieldVal - 1;
-				slider.sliderThumb2.x = (slider.sliderVal2 / 200.0) * 130;
+				slider.sliderVal2 = (cpsFieldVal > MAX_CPS_SLIDER) ? MAX_CPS_SLIDER - 1 : cpsFieldVal - 1;
+				slider.sliderThumb2.x = (slider.sliderVal2 / (double)MAX_CPS_SLIDER) * 130;
 			}
 
 			slider.sliderRange.x = Math.min(slider.sliderThumb1.x, slider.sliderThumb2.x) + 5;
