@@ -339,8 +339,7 @@ public class ClickerGui {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				try {
-					if (!KeyEvent.getKeyModifiersText(e.getModifiers()).contains(KeyEvent.getKeyText(e.getKeyCode()))
-							&& e.getKeyCode() != KeyEvent.VK_CAPS_LOCK) {
+					if (!KeyEvent.getKeyModifiersText(e.getModifiers()).contains(KeyEvent.getKeyText(e.getKeyCode()))) {
 						AutoClicker.toggleKey[0] = KeyEvent.getKeyText(e.getKeyCode());
 						AutoClicker.toggleKey[1] = KeyEvent.getKeyModifiersText(e.getModifiers());
 						AutoClicker.toggleMouseButton = -1;
@@ -448,6 +447,8 @@ public class ClickerGui {
 			modifiersString = "";
 		} else if (keyCode == 32) {
 			keyString = "Space";
+		} else if (keyCode == KeyEvent.VK_CAPS_LOCK) {
+			keyString = "Caps Lock";
 		} else {
 			keyString = KeyEvent.getKeyText(keyCode);
 		}
