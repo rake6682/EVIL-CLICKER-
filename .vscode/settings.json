@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "jnativehook-2.2.2.jar",
+        "trident-1.5.jar"
+    ],
+    "java.configuration.updateBuildConfiguration": "automatic"
+}

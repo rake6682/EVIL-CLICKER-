@@ -10,8 +10,8 @@ import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 
-import org.jnativehook.GlobalScreen;
-import org.jnativehook.NativeHookException;
+import com.github.kwhat.jnativehook.GlobalScreen;
+import com.github.kwhat.jnativehook.NativeHookException;
 
 import com.ruffian7.sevenclicker.gui.ClickerGui;
 import com.ruffian7.sevenclicker.listener.KeyListener;

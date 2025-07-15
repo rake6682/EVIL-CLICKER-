@@ -38,7 +38,6 @@ import javax.swing.text.DocumentFilter;
 
 import org.pushingpixels.trident.Timeline;
 
-import com.apple.eawt.Application;
 import com.ruffian7.sevenclicker.AutoClicker;
 
 public class ClickerGui {
@@ -96,12 +95,16 @@ public class ClickerGui {
 		frame.setAlwaysOnTop(true);
 		frame.setResizable(false);
 
-		if (System.getProperty("os.name").toLowerCase().contains("mac")) {
-			Application.getApplication().setDockIconImage(
-					new ImageIcon(AutoClicker.class.getClassLoader().getResource("assets/7Clicker.png")).getImage());
-		} else {
-			frame.setIconImage(
-					new ImageIcon(AutoClicker.class.getClassLoader().getResource("assets/7Clicker.png")).getImage());
+		try {
+			// Use reflection to call the deprecated API if available
+			Class<?> applicationClass = Class.forName("com.apple.eawt.Application");
+			Object application = applicationClass.getMethod("getApplication").invoke(null);
+			applicationClass.getMethod("setDockIconImage", java.awt.Image.class)
+					.invoke(application, new ImageIcon(AutoClicker.class.getClassLoader()
+							.getResource("assets/icon.png")).getImage());
+		} catch (Exception e) {
+			// Silently fail if the API is not available (non-macOS or newer Java)
+			System.out.println("Could not set dock icon - not on macOS or API unavailable");
 		}
 
 		frame.addWindowFocusListener(new WindowAdapter() {
