@@ -32,6 +32,7 @@ public class AutoClicker {
 	public static long lastTime = 0;
 	public static int minCPS = 8;
 	public static int maxCPS = 12;
+	private static final Random random = new Random();
 	public static int button = 1;
 
 	public static String[] toggleKey = { "", "" };
@@ -52,17 +53,34 @@ public class AutoClicker {
 
 		try {
 			while (true) {
-				Thread.sleep(1);
-				Random random = new Random();
-				if (delay == -1)
-					delay = random.nextInt((1000 / minCPS) - (1000 / maxCPS) + 1) + (1000 / maxCPS);
-
+				// Use nanoseconds for higher precision timing
+				long currentTime = System.nanoTime();
+				
 				if (activated && toggled && !gui.focused) {
-					if (System.currentTimeMillis() - lastTime >= delay) {
-						click();
-						lastTime = System.currentTimeMillis();
-						delay = random.nextInt((1000 / minCPS) - (1000 / maxCPS) + 1) + (1000 / maxCPS);
+					// Calculate delay in nanoseconds for better precision
+					if (delay == -1) {
+						// Convert CPS to nanoseconds delay
+						long minDelayNanos = 1_000_000_000L / maxCPS;
+						long maxDelayNanos = 1_000_000_000L / minCPS;
+						delay = (int) (random.nextInt((int)(maxDelayNanos - minDelayNanos + 1)) + minDelayNanos);
 					}
+					
+					if (currentTime - lastTime >= delay) {
+						click();
+						lastTime = currentTime;
+						// Recalculate delay for next click
+						long minDelayNanos = 1_000_000_000L / maxCPS;
+						long maxDelayNanos = 1_000_000_000L / minCPS;
+						delay = (int) (random.nextInt((int)(maxDelayNanos - minDelayNanos + 1)) + minDelayNanos);
+					}
+				}
+				
+				// Use much smaller sleep for high CPS
+				if (maxCPS > 50) {
+					// For high CPS, use busy waiting with minimal sleep
+					Thread.sleep(0, 100); // 100 nanoseconds to see what happens
+				} else {
+					Thread.sleep(1);
 				}
 			}
 		} catch (InterruptedException e) {
@@ -72,12 +90,17 @@ public class AutoClicker {
 
 	private static void click() {
 		skipNext = true;
-		robot.mousePress((button == 1) ? 16 : 4);
-		robot.mouseRelease((button == 1) ? 16 : 4);
+		
+		// Use correct InputEvent button masks for Robot
+		int mouseButton = (button == 1) ? 16 : 4; // BUTTON1_MASK : BUTTON3_MASK
+		
+		robot.mousePress(mouseButton);
+		robot.mouseRelease(mouseButton);
 
 		if (blockHit) {
-			robot.mousePress((button == 1) ? 4 : 16);
-			robot.mouseRelease((button == 1) ? 4 : 16);
+			int altButton = (button == 1) ? 4 : 16; // Opposite button
+			robot.mousePress(altButton);
+			robot.mouseRelease(altButton);
 		}
 	}
 
