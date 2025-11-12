@@ -1,14 +1,6 @@
 package com.ruffian7.sevenclicker.gui;
 
-import java.awt.AWTEvent;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
-import java.awt.KeyboardFocusManager;
-import java.awt.Point;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.AWTEventListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,7 +30,7 @@ import javax.swing.text.DocumentFilter;
 
 import org.pushingpixels.trident.Timeline;
 
-import com.apple.eawt.Application;
+import java.awt.desktop.*;
 import com.ruffian7.sevenclicker.AutoClicker;
 
 public class ClickerGui {
@@ -97,7 +89,8 @@ public class ClickerGui {
 		frame.setResizable(false);
 
 		if (System.getProperty("os.name").toLowerCase().contains("mac")) {
-			Application.getApplication().setDockIconImage(
+			Taskbar userTaskbar = Taskbar.getTaskbar();
+            userTaskbar.setIconImage(
 					new ImageIcon(AutoClicker.class.getClassLoader().getResource("assets/7Clicker.png")).getImage());
 		} else {
 			frame.setIconImage(

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="7Clicker-Java-21.08">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/7Clicker.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jnativehook-2.0.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/trident.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
