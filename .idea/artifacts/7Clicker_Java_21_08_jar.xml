@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="7Clicker-Java-21.08:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/7Clicker_Java_21_08_jar</output-path>
+    <root id="archive" name="7Clicker-Java-21.08.jar">
+      <element id="module-output" name="7Clicker-Java-21.08" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/7Clicker.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/jnativehook-2.0.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/trident.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
