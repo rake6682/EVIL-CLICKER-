@@ -71,9 +71,12 @@ public class AutoClicker {
 	}
 
 	private static void click() {
+		System.out.println("Printing from click: " + skipNext);
 		skipNext = true;
 		robot.mousePress((button == 1) ? 16 : 4);
+		System.out.println("Robot mouse 1 down sent");
 		robot.mouseRelease((button == 1) ? 16 : 4);
+		System.out.println("Robot mouse 1 up sent");
 
 		if (blockHit) {
 			robot.mousePress((button == 1) ? 4 : 16);
