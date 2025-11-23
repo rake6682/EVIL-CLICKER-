@@ -2,8 +2,8 @@ package com.ruffian7.sevenclicker.listener;
 
 import java.awt.event.MouseEvent;
 
-import org.jnativehook.mouse.NativeMouseEvent;
-import org.jnativehook.mouse.NativeMouseListener;
+import com.github.kwhat.jnativehook.mouse.NativeMouseEvent;
+import com.github.kwhat.jnativehook.mouse.NativeMouseListener;
 
 import com.ruffian7.sevenclicker.AutoClicker;
 
